@@ -1,4 +1,7 @@
 #pragma once
+#include <ostream>
+
+using namespace std;
 class Set {
 protected:   
 	// class variables
@@ -21,10 +24,13 @@ protected:
 public:   
 	// default constructor
 	Set();
+
 	// copy constructor
-	Set(const Set&);
+	Set(const Set &set2);
+
 	// type convert constructor
 	Set(initializer_list<int> iniList);
+
 	// Destructor
 	~Set();
 
