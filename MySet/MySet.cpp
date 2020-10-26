@@ -107,7 +107,7 @@ Set Set::intersection(const Set& set) const
 bool Set::contains(int e) const
 {
 	for (size_t i = 0; i < m_size; i++) {
-		if (*(begin() + i) == e) {
+		if (this[i] == e) {
 			return true;
 		}
 	}
@@ -117,7 +117,7 @@ bool Set::contains(int e) const
 bool Set::constainsAll(const Set& set) const
 {
 	for (size_t i = 0; i < set.m_size; i++) {
-		if (contains(*(set.begin() + i))) {
+		if (contains(set[i])) {
 			return true;
 		}
 	}
