@@ -36,7 +36,7 @@ Set::Set(initializer_list<int> iniList): Set(iniList.size())
 		// check if the set conatins the current value
 		if (!contains(value)) {
 			// add the value if not in set
-			m_values[m_size] = value;
+			begin()[m_size] = value;
 			m_size++;
 		}
 	}
@@ -54,23 +54,23 @@ Set::~Set()
 
 int* Set::begin() const
 {
-	return nullptr;
+	return m_values.get();
 }
 
 int& Set::operator[](size_t i)
 {
-	// TODO: insert return statement here
+	return  *(begin()+i);
 }
 
 int Set::operator[](size_t i) const
 {
-	return 0;
+	return *(begin()+i);
 }
 
 Set Set::merge(const Set& set) const
 {
 	Set result(m_size + set.m_size);
-	std::copy_n(begin(), m_size, result.begin());
+	copy_n(begin(), m_size, result.begin());
 	result.m_size = m_size;
 	for (size_t i = 0; i < set.m_size; i++) {
 		if (!contains(set[i])) result[result.m_size++] = set[i];
@@ -80,30 +80,56 @@ Set Set::merge(const Set& set) const
 
 Set Set::difference(const Set& set) const
 {
-	return Set();
+	Set result(set.m_size);
+	for (size_t i = 0; i < set.m_size; i++) {
+		if (!contains(set[i])) result[result.m_size++] = set[i];
+	}
+	return result;
 }
 
 Set Set::intersection(const Set& set) const
 {
-	return Set();
+	// use the smaller set for the result and loop
+	Set result((m_size < set.m_size) ? m_size : set.m_size);
+	if (m_size < set.m_size) {
+		for (size_t i = 0; i < m_size; i++) {
+			if (set.contains(*(begin() + i))) result[result.m_size++] = *(begin() + i); // this[i] does not work
+		}
+	} else {
+		for (size_t i = 0; i < set.m_size; i++) {
+			if (contains(set[i])) result[result.m_size++] = set[i];
+		}
+	}
+	
+	return result;
 }
 
 bool Set::contains(int e) const
 {
+	for (size_t i = 0; i < m_size; i++) {
+		if (*(begin() + i) == e) {
+			return true;
+		}
+	}
 	return false;
 }
 
 bool Set::constainsAll(const Set& set) const
 {
+	for (size_t i = 0; i < set.m_size; i++) {
+		if (contains(*(set.begin() + i))) {
+			return true;
+		}
+	}
 	return false;
 }
 
 bool Set::isEmpty() const
 {
-	return false;
+	return m_values == nullptr || m_size == 0;
 }
 
 size_t Set::size() const
 {
-	return size_t();
+	return m_size;
 }
