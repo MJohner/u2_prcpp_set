@@ -9,7 +9,6 @@ protected:
 	size_t m_size;
 	
 	// protected constructor 
-	// protected constructor 
 	explicit Set(size_t capacity) : m_values(make_unique<int[]>(capacity)), m_size(0)
 	{
 		cout << "private-ctor called" << endl;

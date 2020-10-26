@@ -6,13 +6,15 @@
 using namespace std;
 int main()
 {
-    std::cout << "Hello World!\n";
-    Set s1;
-    Set s11(s1);
-    
-    Set s2({ 1,2,3 });
-    Set s21(s2);
-    Set s22 = s2;
+    cout << "Hello World!\n";
+	Set s1({ 1,2,3 });
+	Set s2({ 3,2,4 });
+	Set s3({ 1,2,3,4 });
+
+	cout << s1 << endl;
+	cout << s2 << endl;
+	Set s4 = Set::merge(s1, s2);
+	cout << s4 << endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

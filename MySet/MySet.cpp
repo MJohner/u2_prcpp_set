@@ -14,10 +14,11 @@ Set::Set() {
 }
 
 // copy constructor
-Set::Set(const Set &set2): Set(set2.m_size)
+Set::Set(const Set& set2)
 {
 	m_values = set2.m_values;
-	cout << "copy-ctor called" << endl;
+	m_size = set2.m_size;
+	cout << "copy-ctor called new Set: "<< this << endl;
 }
 
 // type convert constructor
@@ -35,9 +36,6 @@ Set::Set(initializer_list<int> iniList): Set(iniList.size())
 		}
 	}
 }
-
-
-
 
 // destructor
 Set::~Set()
@@ -61,12 +59,12 @@ int Set::operator[](size_t i) const
 	return *(begin()+i);
 }
 
-Set Set::merge(const Set& set) const
+Set Set::merge(const Set &set) const
 {
 	Set result(m_size + set.m_size);
 	copy_n(begin(), m_size, result.begin());
 	result.m_size = m_size;
-	for (size_t i = 0; i < set.m_size; i++) {
+	for (size_t i = 0; i < set.m_size; ++i) {
 		if (!contains(set[i])) result[result.m_size++] = set[i];
 	}
 	return result;
@@ -111,11 +109,11 @@ bool Set::contains(int e) const
 bool Set::containsAll(const Set& set) const
 {
 	for (size_t i = 0; i < set.m_size; i++) {
-		if (contains(set[i])) {
-			return true;
+		if (!contains(set[i])) {
+			return false;
 		}
 	}
-	return false;
+	return true;
 }
 
 bool Set::isEmpty() const
