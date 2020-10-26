@@ -51,7 +51,7 @@ int* Set::begin() const
 
 int& Set::operator[](size_t i)
 {
-	return  *(begin()+i);
+	return *(begin()+i);
 }
 
 int Set::operator[](size_t i) const
@@ -85,7 +85,7 @@ Set Set::intersection(const Set& set) const
 	Set result((m_size < set.m_size) ? m_size : set.m_size);
 	if (m_size < set.m_size) {
 		for (size_t i = 0; i < m_size; i++) {
-			if (set.contains(*(begin() + i))) result[result.m_size++] = *(begin() + i); // this[i] does not work
+			if (set.contains((*this)[i])) result[result.m_size++] = (*this)[i]; // this[i] does not work
 		}
 	} else {
 		for (size_t i = 0; i < set.m_size; i++) {
@@ -99,7 +99,7 @@ Set Set::intersection(const Set& set) const
 bool Set::contains(int e) const
 {
 	for (size_t i = 0; i < m_size; i++) {
-		if (*(begin() + i) == e) {
+		if ((*this)[i] == e) {
 			return true;
 		}
 	}

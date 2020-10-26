@@ -59,5 +59,8 @@ public:
 	// class methods
 	static Set merge(const Set& set1, const Set& set2) { return set1.merge(set2);}
 	static Set difference(const Set& set1, const Set& set2) { return set2.difference(set1); }
+	
 	static Set intersection(const Set& set1, const Set& set2) { return set1.intersection(set2); }
+	
+	
 };
