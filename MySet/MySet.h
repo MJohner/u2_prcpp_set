@@ -1,6 +1,6 @@
 #pragma once
 #include <ostream>
-
+#include <iostream>
 using namespace std;
 class Set {
 protected:   
@@ -9,7 +9,11 @@ protected:
 	size_t m_size;
 	
 	// protected constructor 
-	Set(size_t capacity);
+	// protected constructor 
+	explicit Set(size_t capacity) : m_values(make_unique<int[]>(capacity)), m_size(0)
+	{
+		cout << "private-ctor called" << endl;
+	}
 
 	// protected methods
 	int *begin() const;
@@ -36,12 +40,12 @@ public:
 
 	// instance methods
 	bool contains(int e) const;
-	bool constainsAll(const Set& set) const;
+	bool containsAll(const Set& set) const;
 	bool isEmpty() const;
 	size_t size() const;
 
 	bool operator==(const Set& set) const {
-		return size() == set.size() && constainsAll(set) && set.constainsAll(*this);
+		return size() == set.size() && containsAll(set) && set.containsAll(*this);
 	}
 	
 	// output operator

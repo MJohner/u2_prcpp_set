@@ -7,6 +7,12 @@ using namespace std;
 int main()
 {
     std::cout << "Hello World!\n";
+    Set s1;
+    Set s11(s1);
+    
+    Set s2({ 1,2,3 });
+    Set s21(s2);
+    Set s22 = s2;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

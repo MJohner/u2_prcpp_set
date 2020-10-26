@@ -1,8 +1,8 @@
-#include "stdafx.h"
 #include "CppUnitTest.h"
 
 #include "../MySet/MySet.h"
 #include "../MySet/OrderedSet.h"
+
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -16,7 +16,7 @@ namespace UnitTest
 		{
 			Set s1;
 			Set s11(s1);
-			Set s4({5,4,3,2,1});
+			Set s4({ 5,4,3,2,1 });
 			Set s41(s4);
 			Set s42 = s4;
 		}
@@ -114,7 +114,7 @@ namespace UnitTest
 			Assert::IsTrue(s1 == s4);
 			Assert::AreEqual(s1.size(), s4.size());
 		}
-
+		/*
 		TEST_METHOD(Union_Ordered) {
 			OrderedSet s1({ 3,2,1,1,2 });
 			OrderedSet s2({ 3,2,4 });
@@ -194,5 +194,6 @@ namespace UnitTest
 			Assert::IsTrue(s2.getLarger(20) == OrderedSet());
 			Assert::IsTrue(s2.getLarger(21) == OrderedSet());
 		}
+		*/
 	};
 }

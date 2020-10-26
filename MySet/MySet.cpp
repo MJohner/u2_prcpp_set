@@ -13,12 +13,6 @@ Set::Set() {
 	cout << "default-ctor called" << endl;
 }
 
-// protected constructor 
-explicit Set::Set(size_t capacity): m_values(make_unique<int[]>(capacity)), m_size(0)
-{
-	cout << "private-ctor called" << endl;
-}
-
 // copy constructor
 Set::Set(const Set &set2): Set(set2.m_size)
 {
@@ -107,14 +101,14 @@ Set Set::intersection(const Set& set) const
 bool Set::contains(int e) const
 {
 	for (size_t i = 0; i < m_size; i++) {
-		if (this[i] == e) {
+		if (*(begin() + i) == e) {
 			return true;
 		}
 	}
 	return false;
 }
 
-bool Set::constainsAll(const Set& set) const
+bool Set::containsAll(const Set& set) const
 {
 	for (size_t i = 0; i < set.m_size; i++) {
 		if (contains(set[i])) {
