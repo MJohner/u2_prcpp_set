@@ -10,7 +10,7 @@ using namespace std;
 // default constructor
 Set::Set() {
 	m_size = 0;
-	cout << "default-ctor called" << endl;
+	cout << "std-ctor" << endl;
 }
 
 // copy constructor
@@ -18,13 +18,13 @@ Set::Set(const Set& set2)
 {
 	m_values = set2.m_values;
 	m_size = set2.m_size;
-	cout << "copy-ctor called new Set: "<< this << endl;
+	cout << "copy-ctor: "<< *this << endl;
 }
 
 // type convert constructor
 Set::Set(initializer_list<int> iniList): Set(iniList.size())
 {
-	cout << "type-convert-ctor called" << endl;
+	
 	;
 	// iterate over given list
 	for (int value : iniList) {
@@ -35,12 +35,13 @@ Set::Set(initializer_list<int> iniList): Set(iniList.size())
 			m_size++;
 		}
 	}
+	cout << "conv ctor: copy values " << *this << endl;
 }
 
 // destructor
 Set::~Set()
 {
-	cout << "destructor called" << endl;
+	cout << "destructor: " << *this << endl;
 }
 
 
@@ -79,6 +80,20 @@ Set Set::difference(const Set& set) const
 	return result;
 }
 
+Set Set::difference(Set&& set) const
+{
+	if (set.m_values.use_count() == 1) {
+		set.m_size = 0;
+		for (size_t i = 0; i < m_size; i++) {
+			if (!contains(set[i])) set[set.m_size++] = set[i];
+		}
+		return set;
+	}
+	else {
+		return difference(set);
+	}
+}
+
 Set Set::intersection(const Set& set) const
 {
 	// use the smaller set for the result and loop
@@ -92,8 +107,21 @@ Set Set::intersection(const Set& set) const
 			if (contains(set[i])) result[result.m_size++] = set[i];
 		}
 	}
-	
 	return result;
+}
+
+Set Set::intersection(Set&& set) const {
+	if (set.m_values.use_count() == 1) {
+		set.m_size = 0;
+		for (size_t i = 0; i < m_size; i++) {
+			if (contains(set[i])) set[set.m_size++] = set[i];
+		}
+		cout << set << endl;
+		return set;
+	}
+	else {
+		return intersection(set);
+	}
 }
 
 bool Set::contains(int e) const

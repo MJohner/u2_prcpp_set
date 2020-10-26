@@ -11,7 +11,7 @@ protected:
 	// protected constructor 
 	explicit Set(size_t capacity) : m_values(make_unique<int[]>(capacity)), m_size(0)
 	{
-		cout << "private-ctor called" << endl;
+		cout << "private-ctor called: len = " << capacity << endl;
 	}
 
 	// protected methods
@@ -22,7 +22,9 @@ protected:
 	// Set operations
 	Set merge(const Set& set) const;
 	Set difference(const Set& set) const;
+	Set difference(Set&& set) const;
 	Set intersection(const Set& set) const;
+	Set intersection(Set&& set) const;
 
 public:   
 	// default constructor
@@ -58,9 +60,14 @@ public:
 	}
 	// class methods
 	static Set merge(const Set& set1, const Set& set2) { return set1.merge(set2);}
+	
 	static Set difference(const Set& set1, const Set& set2) { return set2.difference(set1); }
-	
+	static Set difference(Set&& set1, const Set& set2) { return set2.difference(move(set1)); }
+	static Set difference(Set&& set1, Set&& set2) { return set2.difference(move(set1));}
+
+
 	static Set intersection(const Set& set1, const Set& set2) { return set1.intersection(set2); }
-	
-	
+	static Set intersection(const Set& set1, Set&& set2) { return set1.intersection(move(set2)); }
+	static Set intersection(Set&& set1, const Set& set2) { return set2.intersection(move(set1)); }
+	static Set intersection(Set&& set1, Set&& set2) { return set1.intersection(move(set2)); }
 };
