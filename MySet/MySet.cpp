@@ -24,8 +24,6 @@ Set::Set(const Set& set2)
 // type convert constructor
 Set::Set(initializer_list<int> iniList): Set(iniList.size())
 {
-	
-	;
 	// iterate over given list
 	for (int value : iniList) {
 		// check if the set conatins the current value

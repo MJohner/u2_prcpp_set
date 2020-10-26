@@ -15,16 +15,16 @@ protected:
 	}
 
 	// protected methods
-	int *begin() const;
+	virtual int *begin() const;
 	int& operator[](size_t i);
 	int operator[](size_t i) const;
 
 	// Set operations
-	Set merge(const Set& set) const;
-	Set difference(const Set& set) const;
-	Set difference(Set&& set) const;
-	Set intersection(const Set& set) const;
-	Set intersection(Set&& set) const;
+	virtual Set merge(const Set& set) const;
+	virtual Set difference(const Set& set) const;
+	virtual Set difference(Set&& set) const;
+	virtual Set intersection(const Set& set) const;
+	virtual Set intersection(Set&& set) const;
 
 public:   
 	// default constructor
@@ -40,7 +40,7 @@ public:
 	~Set();
 
 	// instance methods
-	bool contains(int e) const;
+	virtual bool contains(int e) const;
 	bool containsAll(const Set& set) const;
 	bool isEmpty() const;
 	size_t size() const;
