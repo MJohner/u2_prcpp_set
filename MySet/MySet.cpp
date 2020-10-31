@@ -18,7 +18,7 @@ Set::Set(const Set& set2)
 {
 	m_values = set2.m_values;
 	m_size = set2.m_size;
-	cout << " Base copy-ctor: "<< *this << " Size: " << m_size << endl;
+	cout << "Base copy-ctor: "<< *this << " Size: " << m_size << endl;
 }
 
 // type convert constructor

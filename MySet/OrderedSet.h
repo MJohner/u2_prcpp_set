@@ -8,10 +8,9 @@
 class OrderedSet : public Set {
 	using Set::Set;
 protected:
-	size_t m_start;
+	size_t m_start = 0;
 	// protected constructor
 	explicit OrderedSet(size_t capacity) : Set(capacity) {
-		m_start = 0;
 		cout << "os private-ctor called: len = " << m_size << endl;
 	};
 
@@ -29,6 +28,8 @@ public:
 
 	// copy constructor
 	OrderedSet(const Set& set2);
+
+	OrderedSet(const OrderedSet& set2);
 
 	// type convert constructor
 	OrderedSet(initializer_list<int> iniList);

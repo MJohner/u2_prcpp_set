@@ -13,7 +13,7 @@ protected:
 	// protected constructor 
 	explicit Set(size_t capacity) : m_values(make_unique<int[]>(capacity)), m_size(0)
 	{
-		cout << "base private-ctor called: len = " << m_size << endl;
+		cout << "Base private-ctor called: len = " << m_size << endl;
 	}
 
 	// protected methods
