@@ -8,10 +8,12 @@ protected:
 	shared_ptr<int[]> m_values;
 	size_t m_size;
 	
+	// make OrderedSet frient to access m_values
+	friend class OrderedSet;
 	// protected constructor 
 	explicit Set(size_t capacity) : m_values(make_unique<int[]>(capacity)), m_size(0)
 	{
-		cout << "private-ctor called: len = " << capacity << endl;
+		cout << "base private-ctor called: len = " << m_size << endl;
 	}
 
 	// protected methods
@@ -41,7 +43,7 @@ public:
 
 	// instance methods
 	virtual bool contains(int e) const;
-	bool containsAll(const Set& set) const;
+	virtual bool containsAll(const Set& set) const;
 	bool isEmpty() const;
 	size_t size() const;
 

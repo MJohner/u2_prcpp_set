@@ -3,12 +3,14 @@
 
 #include <iostream>
 #include "../MySet/MySet.h" 
+#include "../MySet/OrderedSet.h"
 using namespace std;
 int main()
 {
-    Set s;
-    s = Set::difference(Set({ 1,2,3 }), Set({ 2,3,4 }));
-    cout << s << endl;
+    OrderedSet s1({ 1,2,3,20,13,9 });
+    OrderedSet s2 = OrderedSet({ 1,2,3,9});
+    cout << s1.getSmaller(10) << endl;
+
 
 }
 

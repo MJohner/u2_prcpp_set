@@ -10,7 +10,7 @@ using namespace std;
 // default constructor
 Set::Set() {
 	m_size = 0;
-	cout << "std-ctor" << endl;
+	cout << "Base std-ctor" << endl;
 }
 
 // copy constructor
@@ -18,7 +18,7 @@ Set::Set(const Set& set2)
 {
 	m_values = set2.m_values;
 	m_size = set2.m_size;
-	cout << "copy-ctor: "<< *this << endl;
+	cout << " Base copy-ctor: "<< *this << " Size: " << m_size << endl;
 }
 
 // type convert constructor
@@ -33,13 +33,13 @@ Set::Set(initializer_list<int> iniList): Set(iniList.size())
 			m_size++;
 		}
 	}
-	cout << "conv ctor: copy values " << *this << endl;
+	cout << "Base conv ctor: copy values " << *this << " Size: " << m_size<< endl;
 }
 
 // destructor
 Set::~Set()
 {
-	cout << "destructor: " << *this << endl;
+	cout << "Base s_destructor: " << *this << endl;
 }
 
 

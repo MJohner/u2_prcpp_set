@@ -5,13 +5,14 @@
 
 
 
-class OrderedSet : Set {
+class OrderedSet : public Set {
 	using Set::Set;
 protected:
 	size_t m_start;
 	// protected constructor
 	explicit OrderedSet(size_t capacity) : Set(capacity) {
 		m_start = 0;
+		cout << "os private-ctor called: len = " << m_size << endl;
 	};
 
 	int *begin() const override;
@@ -36,5 +37,10 @@ public:
 	~OrderedSet();
 
 	bool contains(int e) const override;
+	bool containsAll(const Set& set) const override;
+
+	OrderedSet getSmaller(int x) const;
+
+	OrderedSet getLarger(int x) const;
 };
 
