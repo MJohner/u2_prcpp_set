@@ -43,27 +43,7 @@ int* OrderedSet::begin() const
 
 Set OrderedSet::merge(const Set& set) const
 {
-	return Set();
-}
-
-Set OrderedSet::difference(const Set& set) const
-{
-	return Set();
-}
-
-Set OrderedSet::difference(Set&& set) const
-{
-	return Set();
-}
-
-Set OrderedSet::intersection(const Set& set) const
-{
-	return Set();
-}
-
-Set OrderedSet::intersection(Set&& set) const
-{
-	return Set();
+	return Set::merge(set);
 }
 
 
@@ -106,7 +86,7 @@ OrderedSet OrderedSet::getSmaller(int x) const
 	int right = m_size - 1;
 	OrderedSet os = OrderedSet(*this);
 	// check edge case x <= first element
-	if (x <= (*this)[m_start]) {
+	if (x <= (*this)[left]) {
 		os.m_size = 0;
 		return os;
 	}
@@ -134,7 +114,7 @@ OrderedSet OrderedSet::getLarger(int x) const
 	int right = m_size - 1;
 	OrderedSet os = OrderedSet(*this);
 	// check edge case x < first element
-	if (x < (*this)[m_start]) {
+	if (x < (*this)[left]) {
 		return os;
 	}
 	int middle = left + ((right - left) / 2);

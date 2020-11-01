@@ -23,10 +23,10 @@ protected:
 
 	// Set operations
 	virtual Set merge(const Set& set) const;
-	virtual Set difference(const Set& set) const;
-	virtual Set difference(Set&& set) const;
-	virtual Set intersection(const Set& set) const;
-	virtual Set intersection(Set&& set) const;
+	Set difference(const Set& set) const;
+	Set difference(Set&& set) const;
+	Set intersection(const Set& set) const;
+	Set intersection(Set&& set) const;
 
 public:   
 	// default constructor

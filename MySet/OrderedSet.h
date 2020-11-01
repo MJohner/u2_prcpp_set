@@ -17,10 +17,6 @@ protected:
 	int *begin() const override;
 
 	Set merge(const Set& set) const override;
-	Set difference(const Set& set) const override;
-	Set difference(Set&& set) const override;
-	Set intersection(const Set& set) const override;
-	Set intersection(Set&& set) const override;
 
 public:
 	// default constructor
@@ -28,7 +24,7 @@ public:
 
 	// copy constructor
 	OrderedSet(const Set& set2);
-
+	// os copy constructor
 	OrderedSet(const OrderedSet& set2);
 
 	// type convert constructor
