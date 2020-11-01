@@ -9,17 +9,17 @@ int main()
 {
     // OrderedSet s1({ 1,2,3,20,13,9 });
     // OrderedSet s2 = s1.getLarger(0);
-    OrderedSet s1({ 5,4,3,2,1 });
-    OrderedSet s2 = s1.getLarger(2); // {3,4,5}
-    OrderedSet s3 = s1.getSmaller(4); // {1,2,3}
-    
+    //OrderedSet s1({ 5,4,3,2,1 });
+    //OrderedSet s2({ 3,4,5,8,10 });
+
+    OrderedSet s3 = Set::merge(OrderedSet({ 1,2 }), OrderedSet({ 3,4 }));
     // OrderedSet s4 = s1.getLarger(4);
     // OrderedSet s5 = s1.getLarger(19);
     // OrderedSet s6 = s1.getLarger(20);
     // OrderedSet s7 = s1.getLarger(21);
 
     // cout << s3.containsAll(OrderedSet({ 2,3,20,13,9 })) << endl;
-    cout << s2.getSmaller(4) << endl;
+    cout << s3 << endl;
     
     /* 
     cout << s1 << endl;

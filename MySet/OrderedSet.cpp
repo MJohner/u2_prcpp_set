@@ -11,7 +11,7 @@ OrderedSet::OrderedSet(const Set& set2): Set(set2)
 {
 	// sort set
 	int* beg = begin();
-	std:sort(beg, beg + m_size);
+	sort(beg, beg + m_size);
 	cout << "os copy ctor: copy values " << *this << " Size: " << m_size << endl;
 }
 OrderedSet::OrderedSet(const OrderedSet& set2) : Set(set2)
@@ -19,7 +19,7 @@ OrderedSet::OrderedSet(const OrderedSet& set2) : Set(set2)
 	m_start = set2.m_start;
 	// sort set
 	int* beg = begin();
-std:sort(beg, beg + m_size);
+	sort(beg, beg + m_size);
 	cout << "os copy(os) ctor: copy values " << *this << " Size: " << m_size << endl;
 }
 
@@ -27,7 +27,7 @@ OrderedSet::OrderedSet(initializer_list<int> iniList): Set(iniList)
 {
 	// sort set
 	int* beg = begin();
-	std::sort(beg, beg + m_size);
+	sort(beg, beg + m_size);
 	cout << "os conv ctor: copy values " << *this <<  " Size: " << m_size << endl;
 }
 
@@ -43,18 +43,49 @@ int* OrderedSet::begin() const
 
 Set OrderedSet::merge(const Set& set) const
 {
-	return Set::merge(set);
+	// type check for OrderedSet
+	const OrderedSet *os = dynamic_cast<const OrderedSet*>(&set);
+	if (os == nullptr) {
+		return Set::merge(set);
+	}
+
+	// create result set
+	OrderedSet result(m_size + set.m_size);
+	size_t i = 0, j = 0;
+	while (i < m_size && j < set.m_size) {
+		if ((*this)[i] == set[j]) {
+			result[result.m_size++] = (*this)[i];
+			i++, j++;
+		}
+		else if ((*this)[i] < set[j]) {
+			result[result.m_size++] = (*this)[i++];
+		}
+		else {
+			result[result.m_size++] = set[j++];
+		}
+	}
+
+	if (i < m_size) {
+		copy_n(begin()+i, m_size-i, result.begin()+result.m_size);
+		result.m_size += m_size - i;
+	}
+	else if (j < set.m_size) {
+		copy_n(set.begin()+j, set.m_size-j, result.begin()+result.m_size);
+		result.m_size += set.m_size - j;
+	}
+
+	return result;
 }
 
 
 // Contains with binary search
 bool OrderedSet::contains(int e) const
 {
-	int left = 0;
-	int right = m_size - 1;
+	size_t left = 0;
+	size_t right = m_size - 1;
 
 	while (left <= right) {
-		int middle = left + ((right - left) / 2);
+		size_t middle = left + ((right - left) / 2);
 		if ((*this)[middle] == e) {
 			return true;
 		}
@@ -82,15 +113,15 @@ bool OrderedSet::containsAll(const Set& set) const
 
 OrderedSet OrderedSet::getSmaller(int x) const
 {
-	int left = 0;
-	int right = m_size - 1;
+	size_t left = 0;
+	size_t right = m_size - 1;
 	OrderedSet os = OrderedSet(*this);
 	// check edge case x <= first element
 	if (x <= (*this)[left]) {
 		os.m_size = 0;
 		return os;
 	}
-	int middle = left + ((right - left) / 2);
+	size_t middle = left + ((right - left) / 2);
 	while (left <= right && (*this)[middle] != x) {
 		middle = left + ((right - left) / 2);
 		if ((*this)[middle] > x) {
@@ -110,14 +141,14 @@ OrderedSet OrderedSet::getSmaller(int x) const
 
 OrderedSet OrderedSet::getLarger(int x) const
 {
-	int left = 0;
-	int right = m_size - 1;
+	size_t left = 0;
+	size_t right = m_size - 1;
 	OrderedSet os = OrderedSet(*this);
 	// check edge case x < first element
 	if (x < (*this)[left]) {
 		return os;
 	}
-	int middle = left + ((right - left) / 2);
+	size_t middle = left + ((right - left) / 2);
 	while (left <= right && (*this)[middle] != x) {
 		middle = left + ((right - left) / 2);
 		if ((*this)[middle] > x) {
