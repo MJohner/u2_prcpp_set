@@ -151,7 +151,7 @@ OrderedSet OrderedSet::getLarger(int x) const
 	if ((*this)[middle] <= x) {
 		middle++;
 	}
-	os.m_start = middle;
+	os.m_start += middle;
 	os.m_size -= middle;
 	return os;
 }
